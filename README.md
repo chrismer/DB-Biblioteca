@@ -24,4 +24,3 @@ Para crear y poblar la base de datos desde cero, puedes usar la interfaz de lín
     sqlite3 database/biblioteca.db < database/dml/data_load.sql
     sqlite3 database/biblioteca.db < database/logic/views_triggers.sql
     ```
-    amadeo

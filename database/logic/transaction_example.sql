@@ -1,35 +1,35 @@
--- Archivo de Ejemplo de Transacción
---
--- IMPORTANTE: SQLite no tiene un bloque TRY/CATCH en su SQL estándar.
--- La lógica de "verificar y luego actuar" dentro de una única transacción
--- generalmente se maneja en el código de la aplicación (ej. Python, Java, Node.js)
--- que se conecta a la base de datos.
---
--- Este script demuestra los comandos SQL que se ejecutarían dentro de esa lógica.
-
--- Escenario: El usuario con id_usuario = 1 quiere tomar prestado el ejemplar con id_ejemplar = 3.
-
--- Paso 1: Iniciar la transacción.
--- Esto asegura que todas las operaciones siguientes sean atómicas (o todo o nada).
+-- Iniciamos una transacción. 
+-- Esto garantiza que todos los pasos (autor, género y libro) 
+-- se ejecuten como una sola unidad: o se hacen todos, o ninguno.
 BEGIN TRANSACTION;
 
--- Paso 2 (Lógica en la aplicación): Verificar si el ejemplar está disponible.
--- En una aplicación real, ejecutarías esta consulta y verificarías el resultado.
--- SELECT disponible FROM ejemplares WHERE id_ejemplar = 3;
--- Si el resultado es 0, la aplicación haría un ROLLBACK y notificaría al usuario.
--- Si es 1, procedería al siguiente paso.
+-- Insertamos al autor "Isabel Allende" solo si no existe todavía.
+-- Usamos WHERE NOT EXISTS para evitar duplicados en la tabla de autores.
+INSERT INTO autores (nombre)
+SELECT 'Isabel Allende'
+WHERE NOT EXISTS (
+    SELECT 1 FROM autores WHERE nombre = 'Isabel Allende'
+);
 
--- Asumimos que el ejemplar está disponible.
+-- Insertar el género "Literatura contemporánea" solo si no existe.
+INSERT INTO genero (descripcion)
+SELECT 'Literatura contemporánea'
+WHERE NOT EXISTS (
+    SELECT 1 FROM genero WHERE descripcion = 'Literatura contemporánea'
+);
 
--- Paso 3: Insertar el registro del préstamo.
--- La fecha se establece por defecto a la actual gracias al DEFAULT en el DDL.
--- El trigger `trg_prestamo_insert` se disparará automáticamente aquí
--- y pondrá `ejemplares.disponible` en 0.
-INSERT INTO prestamos (id_usuario, id_ejemplar) VALUES (1, 3);
+-- Finalmente, insertamos el libro "La casa de los espíritus"
+INSERT INTO libros (isbn, titulo, id_autor, id_genero, anio_publicacion, edicion)
+VALUES (
+    '9788408172177',
+    'La casa de los espíritus',
+    (SELECT id_autor FROM autores WHERE nombre = 'Isabel Allende'),
+    (SELECT id_genero FROM genero WHERE descripcion = 'Literatura contemporánea'),
+    1982,
+    1
+);
 
--- Paso 4: Si todo ha ido bien, confirmar la transacción.
--- Los cambios se guardan permanentemente en la base de datos.
+
 COMMIT;
-
--- Si en algún punto hubiera ocurrido un error, se ejecutaría:
+-- Si alguna de las operaciones falla, se puede hacer un ROLLBACK para deshacer todos los cambios.
 -- ROLLBACK;
