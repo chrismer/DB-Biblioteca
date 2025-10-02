@@ -27,18 +27,11 @@ CREATE TABLE genero (
 CREATE TABLE libros (
     isbn VARCHAR(13) PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
+    id_autor INTEGER NOT NULL,
     id_genero INTEGER NOT NULL,
     anio_publicacion INTEGER NOT NULL,
     edicion INTEGER NOT NULL,
     FOREIGN KEY (id_genero) REFERENCES genero(id_genero)
-);
-
--- Tabla intermedia para manejar la relación muchos a muchos entre libros y autores.
-CREATE TABLE libros_autores (
-    isbn VARCHAR(13) NOT NULL,
-    id_autor INTEGER NOT NULL,
-    PRIMARY KEY (isbn, id_autor),
-    FOREIGN KEY (isbn) REFERENCES libros(isbn),
     FOREIGN KEY (id_autor) REFERENCES autores(id_autor)
 );
 

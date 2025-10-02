@@ -41,8 +41,7 @@ SELECT
     g.descripcion AS genero,
     COUNT(e.id_ejemplar) AS copias_disponibles
 FROM libros l
-JOIN libros_autores la ON l.isbn = la.isbn
-JOIN autores a ON la.id_autor = a.id_autor
+JOIN autores a ON l.id_autor = a.id_autor
 JOIN genero g ON l.id_genero = g.id_genero
 JOIN ejemplares e ON l.isbn = e.isbn
 WHERE e.disponible = 1
