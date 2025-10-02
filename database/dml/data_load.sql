@@ -17,20 +17,12 @@ INSERT INTO genero (descripcion) VALUES
 ('Distopía');
 
 -- Libros
-INSERT INTO libros (isbn, titulo, id_genero, anio_publicacion, edicion) VALUES
-('9788437604947', 'Cien años de soledad', 1, 1967, 1),
-('9788478884452', 'Harry Potter y la piedra filosofal', 2, 1997, 1),
-('9780451524935', '1984', 4, 1949, 1),
-('9780553803709', 'Yo, Robot', 3, 1950, 1),
-('9788445071762', 'El Señor de los Anillos: La Comunidad del Anillo', 2, 1954, 3);
-
--- Relación Libros-Autores
-INSERT INTO libros_autores (isbn, id_autor) VALUES
-('9788437604947', 1), -- Cien años de soledad -> Gabriel García Márquez
-('9788478884452', 2), -- Harry Potter -> J.K. Rowling
-('9780451524935', 3), -- 1984 -> George Orwell
-('9780553803709', 4), -- Yo, Robot -> Isaac Asimov
-('9788445071762', 5); -- El Señor de los Anillos -> J.R.R. Tolkien
+INSERT INTO libros (isbn, titulo, id_autor, id_genero, anio_publicacion, edicion) VALUES
+('9788437604947', 'Cien años de soledad', 1, 1, 1967, 1),
+('9788478884452', 'Harry Potter y la piedra filosofal', 2, 2, 1997, 1),
+('9780451524935', '1984', 3, 4, 1949, 1),
+('9780553803709', 'Yo, Robot', 4, 3, 1950, 1),
+('9788445071762', 'El Señor de los Anillos: La Comunidad del Anillo', 5, 2, 1954, 3);
 
 -- Estanterías
 INSERT INTO estanterias (nombre, capacidad) VALUES
