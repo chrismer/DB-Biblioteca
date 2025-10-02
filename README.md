@@ -35,5 +35,5 @@ Para crear y poblar la base de datos desde cero, puedes usar la interfaz de lín
     ```
 
 ## Autores:
-### <a href="https://github.com/socarros02" target="_blank">Amadeo Socarros</a>
-### <a href="https://github.com/chrismer" target="_blank">Christian Mereles</a>
+### [Amadeo Socarros](https://github.com/socarros02)
+### [Christian Mereles](https://github.com/chrismer)
