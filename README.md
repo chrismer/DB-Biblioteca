@@ -1,5 +1,14 @@
 # Proyecto de Base de Datos: Sistema de Biblioteca
 
+## Diagramas
+
+### Diagrama de Entidad-Relación (DER)
+![Diagrama de Entidad-Relación](https://res.cloudinary.com/dmt7nidfb/image/upload/v1759444893/biblioteca_db_der_gp5n6d.jpg)
+
+### Diagrama de Tablas de la Base de Datos
+![Diagrama de Tablas de la DB](https://res.cloudinary.com/dmt7nidfb/image/upload/v1759444892/DiagramaDeTablas_u8y3jx.jpg)
+
+
 Este proyecto implementa una base de datos para la gestión de una biblioteca, como parte del Trabajo Práctico Integrador.
 
 ## Estructura del Proyecto
