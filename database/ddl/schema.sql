@@ -78,3 +78,14 @@ CREATE TABLE prestamos (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_ejemplar) REFERENCES ejemplares(id_ejemplar)
 );
+
+-- =============================================================================
+-- ÍNDICES PARA OPTIMIZACIÓN DE CONSULTAS
+-- =============================================================================
+-- Índices en claves foráneas para acelerar los JOINs y búsquedas.
+CREATE INDEX idx_libros_genero ON libros(id_genero);
+CREATE INDEX idx_ejemplares_isbn ON ejemplares(isbn);
+CREATE INDEX idx_ejemplares_estanteria ON ejemplares(id_estanteria);
+CREATE INDEX idx_prestamos_usuario ON prestamos(id_usuario);
+CREATE INDEX idx_prestamos_ejemplar ON prestamos(id_ejemplar);
+CREATE INDEX idx_libros_autores_autor ON libros_autores(id_autor);
